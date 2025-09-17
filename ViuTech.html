@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViuTec - Produtos em Destaque</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Dados dos produtos mockados
+        const produtos = [
+            {
+                id: 1,
+                nome: "Smartphone Ultra S",
+                descricao: "O mais recente smartphone com tela de 6.7 polegadas, câmera tripla de 108MP e bateria que dura o dia todo. Desempenho excepcional para trabalho e entretenimento.",
+                imagem: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80"
+            },
+            {
+                id: 2,
+                nome: "Notbook Pro X",
+                descricao: "Notebook ultrafino com processador de última geração, 16GB de RAM e SSD de 1TB. Ideal para profissionais que precisam de performance e mobilidade.",
+                imagem: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
+            },
+            {
+                id: 3,
+                nome: "Fones Quantum Sound",
+                descricao: "Fones de ouvido com cancelamento de ruído ativo, som surround imersivo e bateria com até 30 horas de duração. Experiência sonora premium.",
+                imagem: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+            },
+            {
+                id: 4,
+                nome: "SmartWatch Connect",
+                descricao: "Relógio inteligente com monitoramento de saúde, notificações inteligentes e resistência à água. Seu companheiro perfeito para o dia a dia.",
+                imagem: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1099&q=80"
+            },
+            {
+                id: 5,
+                nome: "Tablet Vision",
+                descricao: "Tablet com tela de 10.9 polegadas, caneta stylus incluída e desempenho superior para criativos e estudantes. Multitarefa sem limites.",
+                imagem: "https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+            },
+            {
+                id: 6,
+                nome: "Console Game Max",
+                descricao: "Console de última geração com gráficos em 4K, armazenamento expansível e compatibilidade retroativa. A imersão gaming nunca foi tão real.",
+                imagem: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80"
+            }
+        ];
+
+        // Componente do Header
+        function Header() {
+            return (
+                <header className="bg-blue-700 text-white py-6 shadow-md">
+                    <div className="container mx-auto px-4">
+                        <div className="flex items-center justify-between">
+                            <h1 className="text-3xl font-bold">ViuTec</h1>
+                            <h2 className="text-xl font-semibold">Produtos em Destaque</h2>
+                        </div>
+                    </div>
+                </header>
+            );
+        }
+
+        // Componente do Produto
+        function ProdutoCard({ produto }) {
+            return (
+                <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
+                    <img 
+                        src={produto.imagem} 
+                        alt={produto.nome}
+                        className="w-full h-56 object-cover"
+                    />
+                    <div className="p-6">
+                        <h3 className="text-xl font-semibold text-gray-800 mb-2">{produto.nome}</h3>
+                        <p className="text-gray-600 mb-4">{produto.descricao}</p>
+                        <button className="bg-blue-600 hover:bg-green-600 text-white font-medium py-2 px-6 rounded transition-colors duration-300">
+                            Comprar agora
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        // Componente da Lista de Produtos
+        function ProdutosList() {
+            return (
+                <main className="container mx-auto px-4 py-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {produtos.map(produto => (
+                            <ProdutoCard key={produto.id} produto={produto} />
+                        ))}
+                    </div>
+                </main>
+            );
+        }
+
+        // Componente do Footer
+        function Footer() {
+            return (
+                <footer className="bg-gray-800 text-white py-6">
+                    <div className="container mx-auto px-4 text-center">
+                        <p>© 2025 ViuTec</p>
+                         <p>por: Rubens Brito</p>
+                    </div>
+                </footer>
+            );
+        }
+
+        // Componente principal da aplicação
+        function App() {
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <Header />
+                    <ProdutosList />
+                    <Footer />
+                </div>
+            );
+        }
+
+        // Renderizar a aplicação
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
